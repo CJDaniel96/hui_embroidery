@@ -1,0 +1,5 @@
+Django>=5.2,<5.3
+wagtail>=7.2,<7.3
+psycopg2-binary>=2.9
+django-tailwind>=2.0
+cookiecutter
