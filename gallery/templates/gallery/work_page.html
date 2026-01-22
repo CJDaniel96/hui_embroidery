@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<div class="bg-white min-h-screen pb-20">
+    <!-- Back Link -->
+    <div class="max-w-7xl mx-auto px-6 pt-10 pb-6">
+        <a href="{{ page.get_parent.url }}"
+            class="text-sm text-gray-400 hover:text-gray-800 uppercase tracking-widest transition-colors flex items-center gap-2">
+            &larr; Back to Gallery
+        </a>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <!-- Main Image Area -->
+        <div class="lg:col-span-8">
+            <div class="bg-gray-50 shadow-sm aspect-auto">
+                {% if page.main_image %}
+                {% image page.main_image width-1200 as img %}
+                <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full h-auto" />
+                {% endif %}
+            </div>
+
+            <!-- Detail Images Grid -->
+            {% if page.details_images.all %}
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+                {% for item in page.details_images.all %}
+                <div class="space-y-2">
+                    {% image item.image width-800 as detail_img %}
+                    <img src="{{ detail_img.url }}" alt="{{ detail_img.alt }}" class="w-full h-auto" />
+                    {% if item.caption %}
+                    <p class="text-xs text-gray-400 font-light italic">{{ item.caption }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Info Sidebar -->
+        <div class="lg:col-span-4 lg:sticky lg:top-10 h-fit space-y-8 pt-4">
+            <div>
+                <h1 class="text-3xl font-light text-gray-900 tracking-wide mb-2">{{ page.title }}</h1>
+                <div class="flex flex-wrap gap-2 text-xs uppercase tracking-wider text-gray-400">
+                    {% for cat in page.categories.all %}
+                    <span class="border border-gray-200 px-2 py-1 rounded">{{ cat.name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="prose prose-slate font-light text-gray-600">
+                {{ page.concept|richtext }}
+            </div>
+
+            <div class="border-t border-gray-100 pt-8 space-y-4">
+                {% if page.year %}
+                <div class="grid grid-cols-3 text-sm">
+                    <span class="text-gray-400 uppercase tracking-wider">Year</span>
+                    <span class="col-span-2 text-gray-800">{{ page.year }}</span>
+                </div>
+                {% endif %}
+
+                {% if page.dimensions %}
+                <div class="grid grid-cols-3 text-sm">
+                    <span class="text-gray-400 uppercase tracking-wider">Size</span>
+                    <span class="col-span-2 text-gray-800">{{ page.dimensions }}</span>
+                </div>
+                {% endif %}
+
+                {% if page.materials %}
+                <div class="grid grid-cols-3 text-sm">
+                    <span class="text-gray-400 uppercase tracking-wider">Material</span>
+                    <span class="col-span-2 text-gray-800">{{ page.materials }}</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="pt-8">
+                <button
+                    class="w-full py-4 border border-black text-black text-sm uppercase tracking-[0.2em] hover:bg-black hover:text-white transition duration-300">
+                    Inquire Interest
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

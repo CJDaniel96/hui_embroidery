@@ -42,7 +42,27 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                sans: ['"Noto Sans SC"', 'sans-serif'],
+                serif: ['"Noto Serif SC"', 'serif'],
+            },
+            colors: {
+                // Atmospheric colors often use subtle off-whites and grays
+                gray: {
+                    50: '#F9FAFB', // Background
+                    100: '#F3F4F6',
+                    200: '#E5E7EB',
+                    300: '#D1D5DB', // Borders
+                    400: '#9CA3AF', // Muted text
+                    500: '#6B7280', // Body text
+                    600: '#4B5563',
+                    700: '#374151',
+                    800: '#1F2937', // Headings
+                    900: '#111827', // Strong accents
+                },
+            },
+        },
     },
     plugins: [
         /**

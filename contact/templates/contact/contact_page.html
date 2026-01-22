@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags widget_tweaks %}
+
+{% block content %}
+<div class="bg-gray-50 min-h-screen pb-20">
+    <!-- Header -->
+    <div class="bg-white py-20 px-6 border-b border-gray-100">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-light text-gray-900 tracking-wider mb-6">{{ page.title }}</h1>
+            <div class="max-w-2xl mx-auto prose prose-sm prose-slate font-light text-gray-500">
+                {{ page.intro|richtext }}
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <!-- Contact Info & Map -->
+        <div class="space-y-12">
+            <div class="bg-white p-8 shadow-sm">
+                <h2 class="text-xl font-light tracking-widest uppercase mb-6 text-gray-800">Studio Address</h2>
+                <div class="prose prose-slate font-light text-gray-600">
+                    {{ page.address|richtext }}
+                </div>
+            </div>
+
+            {% if page.map_embed_code %}
+            <div class="aspect-video w-full bg-gray-200 shadow-sm overflow-hidden grayscale contrast-125">
+                {{ page.map_embed_code|safe }}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Contact Form -->
+        <div class="bg-white p-8 md:p-12 shadow-sm">
+            <h2 class="text-xl font-light tracking-widest uppercase mb-8 text-gray-800">Send an Inquiry</h2>
+
+            <form action="{% pageurl page %}" method="POST" class="space-y-6">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="space-y-2">
+                    <label for="{{ field.id_for_label }}" class="block text-sm uppercase tracking-wider text-gray-500">
+                        {{ field.label }}
+                        {% if field.field.required %}*{% endif %}
+                    </label>
+
+                    {% if field|widget_type == 'textarea' %}
+                    {% render_field field class+="annotated-field w-full border border-gray-300 px-4 py-3
+                    focus:outline-none focus:border-black transition-colors font-light bg-gray-50 h-32" %}
+                    {% else %}
+                    {% render_field field class+="annotated-field w-full border border-gray-300 px-4 py-3
+                    focus:outline-none focus:border-black transition-colors font-light bg-gray-50" %}
+                    {% endif %}
+
+                    {% if field.errors %}
+                    <div class="text-red-500 text-xs mt-1">
+                        {{ field.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <div class="pt-4">
+                    <button type="submit"
+                        class="w-full py-4 bg-black text-white text-sm uppercase tracking-[0.2em] hover:bg-gray-800 transition duration-300">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

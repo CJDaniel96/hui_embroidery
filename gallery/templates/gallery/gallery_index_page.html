@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<div class="bg-gray-50 min-h-screen pb-20">
+    <!-- Header -->
+    <div class="bg-white pt-20 pb-10 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-light text-gray-900 tracking-wider mb-6">{{ page.title }}</h1>
+            <div class="max-w-2xl mx-auto prose prose-sm prose-slate font-light text-gray-500 mb-8">
+                {{ page.intro|richtext }}
+            </div>
+            
+            <!-- Filters -->
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8">
+                <a href="?category=" class="text-sm tracking-widest uppercase transition-colors {% if not selected_category %}text-gray-900 font-normal border-b border-black{% else %}text-gray-400 hover:text-gray-600{% endif %}">
+                    All
+                </a>
+                {% for cat in categories %}
+                <a href="?category={{ cat.slug }}" class="text-sm tracking-widest uppercase transition-colors {% if selected_category == cat.slug %}text-gray-900 font-normal border-b border-black{% else %}text-gray-400 hover:text-gray-600{% endif %}">
+                    {{ cat.name }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="max-w-7xl mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for work in works %}
+            <a href="{{ work.url }}" class="group block">
+                <div class="bg-white shadow-sm overflow-hidden aspect-[4/5] relative">
+                    {% if work.main_image %}
+                        {% image work.main_image fill-600x750 as img %}
+                        <img src="{{ img.url }}" alt="{{ img.alt }}" class="object-cover w-full h-full transition duration-700 group-hover:scale-105" />
+                    {% else %}
+                        <div class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-300">
+                            No Image
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Overlay -->
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <span class="text-white tracking-widest uppercase text-sm border border-white px-6 py-2">View Details</span>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <h3 class="text-lg font-light text-gray-800">{{ work.title }}</h3>
+                    <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">{{ work.categories.all|join:", " }}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        
+        {% if not works %}
+        <div class="text-center py-20 text-gray-400 font-light">
+            <p>No works found in this category.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
