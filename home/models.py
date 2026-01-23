@@ -41,5 +41,26 @@ class HomePage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        # TODO: Add featured works and news once those models exist
+        
+        # Get latest works from Gallery
+        # We use a deferred import to avoid circular dependency issues if any exist,
+        # though ideally we are at the leaf node here.
+        # But standard import at top is better if possible. 
+        # Checking imports above, we need to add them.
+        
+        from gallery.models import WorkPage, GalleryIndexPage
+        from about.models import AboutPage
+        from contact.models import ContactPage
+
+        # Gallery Context
+        # Fetch up to 6 latest published works
+        context['latest_works'] = WorkPage.objects.live().public().order_by('-first_published_at')[:6]
+        context['gallery_index'] = GalleryIndexPage.objects.live().public().first()
+
+        # About Context
+        context['about_page'] = AboutPage.objects.live().public().first()
+
+        # Contact Context
+        context['contact_page'] = ContactPage.objects.live().public().first()
+
         return context
