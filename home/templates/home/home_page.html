@@ -1,68 +1,75 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags i18n %}
 
 {% block content %}
 <!-- Hero Section -->
-<div class="relative w-full h-screen bg-white">
+<div class="relative w-full h-screen bg-canvas overflow-hidden group">
     {% if page.hero_image %}
     {% image page.hero_image fill-1920x1080 as hero_img %}
     <div class="absolute inset-0 w-full h-full">
-        <img src="{{ hero_img.url }}" alt="{{ hero_img.alt }}" class="object-cover w-full h-full opacity-90" />
-        <div class="absolute inset-0 bg-black/10"></div> <!-- Subtle overlay for atmosphere -->
+        <img src="{{ hero_img.url }}" alt="{{ hero_img.alt }}"
+            class="object-cover w-full h-full opacity-90 transition-transform duration-[20000ms] ease-out scale-100 group-hover:scale-110 transform-gpu" />
+        <div class="absolute inset-0 bg-black/20"></div> <!-- Subtle overlay -->
     </div>
     {% else %}
-    <!-- Fallback/Placeholder if no image set -->
+    <!-- Fallback/Placeholder -->
     <div class="absolute inset-0 flex items-center justify-center bg-gray-50">
         <p class="text-gray-300 tracking-widest text-xl">HUI EMBROIDERY</p>
     </div>
     {% endif %}
 
     <!-- Minimalist Branding / Overlay -->
-    <div class="absolute bottom-20 left-10 md:left-20 z-10 text-white drop-shadow-md">
-        <h1 class="text-5xl md:text-7xl font-light tracking-[0.2em] mb-4">湘繡</h1>
-        <p class="text-xl md:text-2xl font-light tracking-wider opacity-90">HUI EMBROIDERY</p>
+    <div class="absolute bottom-20 left-10 md:left-20 z-10 text-white drop-shadow-lg">
+        <h1 class="text-5xl md:text-8xl font-serif font-light tracking-[0.1em] mb-4">湘繡</h1>
+        <p class="text-xl md:text-2xl font-sans font-light tracking-widest opacity-90">HUI EMBROIDERY</p>
     </div>
 </div>
 
 <!-- Intro Section -->
-<section class="py-24 px-6 md:px-20 lg:px-40 bg-white">
+<section class="py-32 px-6 md:px-20 lg:px-40 bg-canvas">
     <div class="max-w-4xl mx-auto text-center">
         {% if page.intro_title %}
-        <h2 class="text-3xl md:text-4xl font-light tracking-wide text-gray-800 mb-12">{{ page.intro_title }}</h2>
+        <h2 class="text-3xl md:text-5xl font-serif font-light tracking-wide text-ink mb-12">{{ page.intro_title }}</h2>
         {% endif %}
 
-        <div class="prose prose-lg prose-slate mx-auto font-light text-gray-600 leading-relaxed">
+        <div class="prose prose-lg prose-slate mx-auto font-sans font-light text-gray-600 leading-relaxed text-lg">
             {{ page.intro_text|richtext }}
         </div>
     </div>
 </section>
 
 <!-- Featured Works Placeholder -->
-<section class="py-20 bg-gray-50">
+<section class="py-24 bg-white">
     <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-            <h3 class="text-2xl font-light tracking-widest text-gray-800 uppercase">Selected Works</h3>
-            <div class="w-16 h-px bg-gray-300 mx-auto mt-6"></div>
+        <div class="text-center mb-20">
+            <h2 class="text-xl md:text-2xl font-serif font-light tracking-[0.2em] text-ink uppercase">
+                {% blocktrans %}Selected Works{% endblocktrans %}
+            </h2>
+            <div class="w-12 h-px bg-gold mx-auto mt-8"></div>
         </div>
 
         <!-- Grid Placeholder -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             <!-- Items will be dynamic later -->
-            <div class="aspect-[4/5] bg-white shadow-sm flex items-center justify-center text-gray-300 font-light">
-                Work 01
+            <div
+                class="aspect-[3/4] bg-gray-50 shadow-sm flex items-center justify-center text-gray-300 font-light hover:shadow-xl transition-shadow duration-500">
+                {% blocktrans %}Work 01{% endblocktrans %}
             </div>
-            <div class="aspect-[4/5] bg-white shadow-sm flex items-center justify-center text-gray-300 font-light">
-                Work 02
+            <div
+                class="aspect-[3/4] bg-gray-50 shadow-sm flex items-center justify-center text-gray-300 font-light hover:shadow-xl transition-shadow duration-500">
+                {% blocktrans %}Work 02{% endblocktrans %}
             </div>
-            <div class="aspect-[4/5] bg-white shadow-sm flex items-center justify-center text-gray-300 font-light">
-                Work 03
+            <div
+                class="aspect-[3/4] bg-gray-50 shadow-sm flex items-center justify-center text-gray-300 font-light hover:shadow-xl transition-shadow duration-500">
+                {% blocktrans %}Work 03{% endblocktrans %}
             </div>
         </div>
 
-        <div class="text-center mt-12">
-            <a href="#"
-                class="inline-block border border-gray-400 px-8 py-3 text-sm tracking-widest text-gray-600 hover:bg-gray-800 hover:text-white transition duration-300">VIEW
-                ALL</a>
+        <div class="text-center mt-20">
+            <a href="/portfolio/"
+                class="inline-block border border-ink/30 px-10 py-4 text-xs tracking-[0.25em] text-ink uppercase hover:bg-ink hover:text-white transition duration-500">
+                {% blocktrans %}View All{% endblocktrans %}
+            </a>
         </div>
     </div>
 </section>

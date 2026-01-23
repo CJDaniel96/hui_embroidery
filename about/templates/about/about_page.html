@@ -1,36 +1,40 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags i18n %}
 
 {% block content %}
-<div class="bg-gray-50 min-h-screen pb-20">
+<div class="bg-canvas min-h-screen pb-20">
     <!-- Header -->
-    <div class="bg-white py-20 px-6 border-b border-gray-100">
+    <div class="pt-24 pb-16 px-6 border-b border-gray-100/50">
         <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-4xl md:text-5xl font-light text-gray-900 tracking-wider mb-6">{{ page.title }}</h1>
-            <div class="w-20 h-px bg-gray-400 mx-auto"></div>
+            <h1 class="text-4xl md:text-5xl font-serif font-light text-ink tracking-widest mb-6">{{ page.title }}</h1>
+            <div class="w-16 h-px bg-gold mx-auto"></div>
         </div>
     </div>
 
     <!-- Biography Section -->
     <section class="max-w-4xl mx-auto px-6 py-16">
-        <div class="prose prose-lg prose-slate mx-auto font-light text-gray-600 leading-relaxed">
+        <div class="prose prose-lg prose-slate mx-auto font-sans font-light text-gray-600 leading-relaxed text-lg">
             {{ page.bio|richtext }}
         </div>
     </section>
 
     <!-- Honors Section -->
     {% if page.honors %}
-    <section class="bg-white py-16 px-6">
+    <section class="bg-white py-20 px-6">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl font-light text-center tracking-widest text-gray-800 mb-12 uppercase">Honors & Awards
+            <h2 class="text-xl font-serif font-light text-center tracking-[0.2em] text-ink mb-16 uppercase">
+                {% trans "Honors & Awards" %}
             </h2>
-            <div class="space-y-8">
+            <div class="space-y-10">
                 {% for block in page.honors %}
-                <div class="flex flex-col md:flex-row md:items-baseline border-b border-gray-100 pb-4">
-                    <span class="text-gray-400 font-mono text-sm md:w-24 shrink-0">{{ block.value.year }}</span>
+                <div
+                    class="flex flex-col md:flex-row md:items-baseline border-b border-gray-100 pb-6 group hover:border-gold transition-colors duration-300">
+                    <span class="text-gold font-serif text-lg md:w-32 shrink-0">{{ block.value.year }}</span>
                     <div class="md:ml-4">
-                        <h3 class="text-lg font-normal text-gray-800">{{ block.value.title }}</h3>
-                        <p class="text-gray-500 text-sm mt-1">{{ block.value.organization }}</p>
+                        <h3 class="text-xl font-light text-ink group-hover:text-black transition-colors">{{
+                            block.value.title }}</h3>
+                        <p class="text-gray-400 text-sm mt-2 font-sans tracking-wide uppercase">{{
+                            block.value.organization }}</p>
                     </div>
                 </div>
                 {% endfor %}
@@ -41,16 +45,16 @@
 
     <!-- Studio Section -->
     {% if page.studio_images %}
-    <section class="max-w-6xl mx-auto px-6 py-16">
-        <div class="text-center mb-12">
-            <h2 class="text-2xl font-light tracking-widest text-gray-800 uppercase">The Studio</h2>
+    <section class="max-w-[1600px] mx-auto px-6 py-20">
+        <div class="text-center mb-16">
+            <h2 class="text-xl font-serif font-light tracking-[0.2em] text-ink uppercase">{% trans "The Studio" %}</h2>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for block in page.studio_images %}
             {% image block.value fill-800x600 as img %}
-            <div class="group relative overflow-hidden bg-gray-200 aspect-[4/3]">
+            <div class="group relative overflow-hidden bg-gray-100 aspect-[4/3]">
                 <img src="{{ img.url }}" alt="{{ img.alt }}"
-                    class="object-cover w-full h-full transition duration-500 group-hover:scale-105" />
+                    class="object-cover w-full h-full transition duration-[1500ms] ease-out group-hover:scale-110" />
                 <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-500"></div>
             </div>
             {% endfor %}

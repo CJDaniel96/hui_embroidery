@@ -44,10 +44,14 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['"Noto Sans SC"', 'sans-serif'],
-                serif: ['"Noto Serif SC"', 'serif'],
+                sans: ['"Noto Sans TC"', 'sans-serif'],
+                serif: ['"Noto Serif TC"', 'serif'],
             },
             colors: {
+                canvas: '#fdfbf7', // Warm rice paper
+                ink: '#2c2c2c',    // Soft charcoal
+                accent: '#a83e3c', // Seal Red
+                gold: '#d4af37',   // Muted gold
                 // Atmospheric colors often use subtle off-whites and grays
                 gray: {
                     50: '#F9FAFB', // Background
