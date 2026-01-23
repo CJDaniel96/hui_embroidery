@@ -1,0 +1,165 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-22 15:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+#: about/templates/about/about_page.html:26
+msgid "Honors & Awards"
+msgstr ""
+
+#: about/templates/about/about_page.html:50
+msgid "The Studio"
+msgstr ""
+
+#: contact/templates/contact/contact_page.html:22
+msgid "Studio Address"
+msgstr ""
+
+#: contact/templates/contact/contact_page.html:40
+msgid "Send an Inquiry"
+msgstr ""
+
+#: contact/templates/contact/contact_page.html:74
+msgid "Send Message"
+msgstr ""
+
+#: gallery/templates/gallery/gallery_index_page.html:19
+msgid "All"
+msgstr "全部"
+
+#: gallery/templates/gallery/gallery_index_page.html:43
+msgid "No Image"
+msgstr "无图片"
+
+#: gallery/templates/gallery/gallery_index_page.html:52
+msgid "View Details"
+msgstr "查看详情"
+
+#: gallery/templates/gallery/gallery_index_page.html:71
+msgid "No works found in this category."
+msgstr "此类别中找不到作品。"
+
+#: gallery/templates/gallery/work_page.html:10
+msgid "Back to Gallery"
+msgstr "返回作品集"
+
+#: gallery/templates/gallery/work_page.html:59
+msgid "Year"
+msgstr "年份"
+
+#: gallery/templates/gallery/work_page.html:66
+msgid "Size"
+msgstr "尺寸"
+
+#: gallery/templates/gallery/work_page.html:73
+msgid "Material"
+msgstr "材质"
+
+#: gallery/templates/gallery/work_page.html:82
+msgid "Inquire Interest"
+msgstr "询问展品"
+
+#: home/templates/home/home_page.html:46
+msgid "Selected Works"
+msgstr "精选作品"
+
+#: home/templates/home/home_page.html:56
+msgid "Work 01"
+msgstr ""
+
+#: home/templates/home/home_page.html:60
+msgid "Work 02"
+msgstr ""
+
+#: home/templates/home/home_page.html:64
+msgid "Work 03"
+msgstr ""
+
+#: home/templates/home/home_page.html:71
+msgid "View All"
+msgstr "查看全部"
+
+#: home/templates/home/welcome_page.html:6
+msgid "Visit the Wagtail website"
+msgstr ""
+
+#: home/templates/home/welcome_page.html:15
+msgid "View the release notes"
+msgstr ""
+
+#: home/templates/home/welcome_page.html:27
+msgid "Welcome to your new Wagtail site!"
+msgstr ""
+
+#: home/templates/home/welcome_page.html:28
+msgid ""
+"Please feel free to <a href=\"https://github.com/wagtail/wagtail/wiki/"
+"Slack\">join our community on Slack</a>, or get started with one of the "
+"links below."
+msgstr ""
+
+#: home/templates/home/welcome_page.html:35
+msgid "Wagtail Documentation"
+msgstr ""
+
+#: home/templates/home/welcome_page.html:36
+msgid "Topics, references, & how-tos"
+msgstr ""
+
+#: home/templates/home/welcome_page.html:42
+msgid "Tutorial"
+msgstr ""
+
+#: home/templates/home/welcome_page.html:43
+msgid "Build your first Wagtail site"
+msgstr ""
+
+#: home/templates/home/welcome_page.html:49
+msgid "Admin Interface"
+msgstr ""
+
+#: home/templates/home/welcome_page.html:50
+msgid "Create your superuser first!"
+msgstr ""
+
+#: hui_embroidery/settings/base.py:142
+msgid "Traditional Chinese"
+msgstr "繁体中文"
+
+#: hui_embroidery/settings/base.py:143
+msgid "Simplified Chinese"
+msgstr "简体中文"
+
+#: hui_embroidery/settings/base.py:144
+msgid "English"
+msgstr "English"
+
+#: hui_embroidery/templates/base.html:53
+msgid "Home"
+msgstr "首页"
+
+#: hui_embroidery/templates/base.html:54
+msgid "About"
+msgstr "关于"
+
+#: hui_embroidery/templates/base.html:55
+msgid "Portfolio"
+msgstr "作品集"
+
+#: hui_embroidery/templates/base.html:56
+msgid "Contact"
+msgstr "联系我们"
