@@ -11,76 +11,93 @@
         </a>
     </div>
 
-    <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16">
-        <!-- Main Image Area -->
-        <div class="lg:col-span-8">
-            <div class="bg-canvas shadow-sm aspect-auto">
-                {% if page.main_image %}
+    <div class="w-full grid grid-cols-1 lg:grid-cols-2">
+        <!-- Left: Sticky Main Image -->
+        <div
+            class="lg:h-screen lg:sticky lg:top-0 bg-canvas flex items-center justify-center p-6 lg:p-20 order-1 lg:order-1 border-b lg:border-b-0 lg:border-r border-gray-100">
+            {% if page.main_image %}
+            <div class="relative w-full h-full flex items-center justify-center">
                 {% image page.main_image width-2000 as img %}
-                <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full h-auto" />
-                {% endif %}
-            </div>
-
-            <!-- Detail Images Grid -->
-            {% if page.details_images.all %}
-            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-                {% for item in page.details_images.all %}
-                <div class="space-y-3">
-                    {% image item.image width-1200 as detail_img %}
-                    <img src="{{ detail_img.url }}" alt="{{ detail_img.alt }}" class="w-full h-auto shadow-sm" />
-                    {% if item.caption %}
-                    <p class="text-[10px] text-gray-500 font-serif italic tracking-wide">{{ item.caption }}</p>
-                    {% endif %}
-                </div>
-                {% endfor %}
+                <img src="{{ img.url }}" alt="{{ img.alt }}" class="max-w-full max-h-[85vh] object-contain shadow-sm" />
             </div>
             {% endif %}
         </div>
 
-        <!-- Info Sidebar -->
-        <div class="lg:col-span-4 lg:sticky lg:top-32 h-fit space-y-10 pt-4">
-            <div>
-                <h1 class="text-3xl md:text-4xl font-serif font-light text-ink tracking-wide mb-4 leading-tight">{{
-                    page.title }}</h1>
-                <div class="flex flex-wrap gap-3 text-[10px] uppercase tracking-[0.2em] text-gray-400 font-sans">
-                    {% for cat in page.categories.all %}
-                    <span class="border border-gray-200 px-3 py-1 bg-gray-50">{{ cat.name }}</span>
+        <!-- Right: Scrollable Content -->
+        <div class="px-6 py-12 lg:p-20 order-2 lg:order-2 bg-white min-h-screen">
+            <!-- Back Link -->
+            <div class="mb-12">
+                <a href="{{ page.get_parent.url }}"
+                    class="text-xs text-gray-400 hover:text-ink uppercase tracking-[0.2em] transition-colors flex items-center gap-3 font-sans">
+                    &larr; {% trans "Back to Gallery" %}
+                </a>
+            </div>
+
+            <!-- Content -->
+            <div class="max-w-xl">
+                <h1 class="text-4xl md:text-5xl font-serif font-light text-ink mb-6 leading-tight">
+                    {{ page.title }}
+                </h1>
+
+                <div
+                    class="space-y-4 mb-12 text-xs tracking-[0.2em] uppercase text-gray-500 font-sans border-t border-b border-gray-100 py-6">
+                    {% if page.year %}
+                    <div class="grid grid-cols-3">
+                        <span class="text-gray-400">{% trans "Year" %}</span>
+                        <span class="col-span-2 text-ink">{{ page.year }}</span>
+                    </div>
+                    {% endif %}
+
+                    {% if page.dimensions %}
+                    <div class="grid grid-cols-3">
+                        <span class="text-gray-400">{% trans "Size" %}</span>
+                        <span class="col-span-2 text-ink">{{ page.dimensions }}</span>
+                    </div>
+                    {% endif %}
+
+                    {% if page.materials %}
+                    <div class="grid grid-cols-3">
+                        <span class="text-gray-400">{% trans "Material" %}</span>
+                        <span class="col-span-2 text-ink">{{ page.materials }}</span>
+                    </div>
+                    {% endif %}
+
+                    {% if page.categories.all %}
+                    <div class="grid grid-cols-3">
+                        <span class="text-gray-400">{% trans "Category" %}</span>
+                        <span class="col-span-2 text-ink">{{ page.categories.all|join:", " }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="prose prose-lg prose-slate font-serif font-light text-ink leading-loose text-justify mb-16">
+                    {{ page.concept|richtext }}
+                </div>
+
+                <div class="pt-8 mb-20">
+                    <a href="/contact-us/"
+                        class="block w-full py-4 border border-ink text-center text-ink text-xs uppercase tracking-[0.25em] hover:bg-ink hover:text-white transition duration-500 font-sans">
+                        {% trans "Inquire Interest" %}
+                    </a>
+                </div>
+
+                <!-- Detail Images (In Scrollable Column) -->
+                {% if page.details_images.all %}
+                <div class="space-y-12">
+                    <h3 class="text-center text-xs uppercase tracking-[0.2em] text-gray-400 mb-8 font-sans">— {% trans
+                        "Details" %} —</h3>
+                    {% for item in page.details_images.all %}
+                    <div class="space-y-3">
+                        {% image item.image width-1200 as detail_img %}
+                        <img src="{{ detail_img.url }}" alt="{{ detail_img.alt }}" class="w-full h-auto shadow-sm" />
+                        {% if item.caption %}
+                        <p class="text-[10px] text-gray-500 font-serif italic tracking-wide text-center">{{ item.caption
+                            }}</p>
+                        {% endif %}
+                    </div>
                     {% endfor %}
                 </div>
-            </div>
-
-            <div class="prose prose-slate font-sans font-light text-gray-600 leading-loose text-sm">
-                {{ page.concept|richtext }}
-            </div>
-
-            <div class="border-t border-gray-100 pt-8 space-y-5 font-sans">
-                {% if page.year %}
-                <div class="grid grid-cols-3 text-xs tracking-widest">
-                    <span class="text-gray-400 uppercase">{% trans "Year" %}</span>
-                    <span class="col-span-2 text-ink">{{ page.year }}</span>
-                </div>
                 {% endif %}
-
-                {% if page.dimensions %}
-                <div class="grid grid-cols-3 text-xs tracking-widest">
-                    <span class="text-gray-400 uppercase">{% trans "Size" %}</span>
-                    <span class="col-span-2 text-ink">{{ page.dimensions }}</span>
-                </div>
-                {% endif %}
-
-                {% if page.materials %}
-                <div class="grid grid-cols-3 text-xs tracking-widest">
-                    <span class="text-gray-400 uppercase">{% trans "Material" %}</span>
-                    <span class="col-span-2 text-ink">{{ page.materials }}</span>
-                </div>
-                {% endif %}
-            </div>
-
-            <div class="pt-8">
-                <a href="/contact-us/"
-                    class="block w-full py-4 border border-ink text-center text-ink text-xs uppercase tracking-[0.25em] hover:bg-ink hover:text-white transition duration-500 font-sans">
-                    {% trans "Inquire Interest" %}
-                </a>
             </div>
         </div>
     </div>

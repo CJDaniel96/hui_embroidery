@@ -44,26 +44,26 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['"Noto Sans TC"', 'sans-serif'],
-                serif: ['"Noto Serif TC"', 'serif'],
+                sans: ['"Noto Sans TC"', '"system-ui"', 'sans-serif'],
+                serif: ['"Noto Serif TC"', '"Songti TC"', 'serif'],
             },
             colors: {
-                canvas: '#fdfbf7', // Warm rice paper
-                ink: '#2c2c2c',    // Soft charcoal
-                accent: '#a83e3c', // Seal Red
-                gold: '#d4af37',   // Muted gold
-                // Atmospheric colors often use subtle off-whites and grays
+                paper: '#F9F7F2', // Warm rice paper
+                ink: '#2C2C2C',   // Soft charcoal
+                'seal-red': '#A83E3C', // Seal Red
+                gold: '#C5A059',   // Muted gold
+                // Keep useful grays
                 gray: {
-                    50: '#F9FAFB', // Background
+                    50: '#F9FAFB',
                     100: '#F3F4F6',
                     200: '#E5E7EB',
-                    300: '#D1D5DB', // Borders
-                    400: '#9CA3AF', // Muted text
-                    500: '#6B7280', // Body text
+                    300: '#D1D5DB',
+                    400: '#9CA3AF',
+                    500: '#6B7280',
                     600: '#4B5563',
                     700: '#374151',
-                    800: '#1F2937', // Headings
-                    900: '#111827', // Strong accents
+                    800: '#1F2937',
+                    900: '#111827',
                 },
             },
         },

@@ -2,95 +2,158 @@
 
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
-    <head>
-        <meta charset="utf-8" />
-        <title>
-            {% block title %}
-            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-            {% wagtail_site as current_site %}
-            {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
-            {% endblock %}
-        </title>
-        {% if page.search_description %}
-        <meta name="description" content="{{ page.search_description }}" />
-        {% endif %}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        {# Force all links in the live preview panel to be opened in a new tab #}
-        {% if request.in_preview_panel %}
-        <base target="_blank">
-        {% endif %}
-
-        {# Global stylesheets #}
-        {% tailwind_css %}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/hui_embroidery.css' %}">
-
-        {% block extra_css %}
-        {# Override this in templates to add extra stylesheets #}
+<head>
+    <meta charset="utf-8" />
+    <title>
+        {% block title %}
+        {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
         {% endblock %}
-        
-        <!-- Fonts: Noto Serif TC (Serif) and Noto Sans TC (Sans) -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@300;400;500&display=swap" rel="stylesheet">
-    </head>
+        {% block title_suffix %}
+        {% wagtail_site as current_site %}
+        {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+        {% endblock %}
+    </title>
+    {% if page.search_description %}
+    <meta name="description" content="{{ page.search_description }}" />
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <body class="font-sans antialiased text-ink bg-canvas {% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+    {# Force all links in the live preview panel to be opened in a new tab #}
+    {% if request.in_preview_panel %}
+    <base target="_blank">
+    {% endif %}
 
-        <!-- Sticky Navbar -->
-        <nav class="fixed top-0 w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gray-100" id="navbar">
-            <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-                <!-- Logo -->
-                <a href="/" class="text-2xl font-serif tracking-widest text-gray-900 uppercase hover:opacity-70 transition-opacity">
-                    Hui Embroidery
-                </a>
+    {# Global stylesheets #}
+    {% tailwind_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/hui_embroidery.css' %}">
 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-10 items-center text-sm tracking-[0.15em] uppercase font-light text-gray-600">
-                    <a href="/" class="hover:text-black transition-colors">{% trans "Home" %}</a>
-                    <a href="/about-master-hui/" class="hover:text-black transition-colors">{% trans "About" %}</a>
-                    <a href="/portfolio/" class="hover:text-black transition-colors">{% trans "Portfolio" %}</a>
-                    <a href="/contact-us/" class="hover:text-black transition-colors">{% trans "Contact" %}</a>
-                    
-                    <!-- Language Switcher -->
-                    <div class="border-l border-gray-300 pl-6 ml-2">
-                        <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
-                            <input name="next" type="hidden" value="{{ request.path }}">
-                            <select name="language" onchange="this.form.submit()" class="bg-transparent border-none text-xs tracking-widest uppercase focus:ring-0 cursor-pointer text-gray-500 hover:text-black">
-                                {% get_current_language as LANGUAGE_CODE %}
-                                {% get_available_languages as LANGUAGES %}
-                                {% get_language_info_list for LANGUAGES as languages %}
-                                {% for language in languages %}
-                                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-                                        {{ language.name_local }}
-                                    </option>
-                                {% endfor %}
-                            </select>
-                        </form>
-                    </div>
-                </div>
+    {% block extra_css %}
+    {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
 
-                <!-- Mobile Menu Button (Placeholder) -->
-                <div class="md:hidden">
-                    <button class="text-gray-900 focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                    </button>
+    <!-- Fonts: Noto Serif TC (Serif) and Noto Sans TC (Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@300;400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="font-sans antialiased text-ink bg-paper leading-loose {% block body_class %}{% endblock %}">
+    {% wagtailuserbar %}
+
+    <!-- Sticky Navbar -->
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gray-100"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="/"
+                class="text-2xl font-serif tracking-widest text-gray-900 uppercase hover:opacity-70 transition-opacity">
+                Hui Embroidery
+            </a>
+
+            <!-- Desktop Menu -->
+            <div
+                class="hidden md:flex space-x-10 items-center text-sm tracking-[0.15em] uppercase font-light text-gray-600">
+                <a href="/" class="hover:text-black transition-colors">{% trans "Home" %}</a>
+                <a href="/about-master-hui/" class="hover:text-black transition-colors">{% trans "About" %}</a>
+                <a href="/portfolio/" class="hover:text-black transition-colors">{% trans "Portfolio" %}</a>
+                <a href="/contact-us/" class="hover:text-black transition-colors">{% trans "Contact" %}</a>
+
+                <!-- Language Switcher -->
+                <div class="border-l border-gray-300 pl-6 ml-2">
+                    <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                        <input name="next" type="hidden" value="{{ request.path }}">
+                        <select name="language" onchange="this.form.submit()"
+                            class="bg-transparent border-none text-xs tracking-widest uppercase focus:ring-0 cursor-pointer text-gray-500 hover:text-black">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                                {{ language.name_local }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </form>
                 </div>
             </div>
-        </nav>
 
-        <div class="pt-20"> <!-- Spacer for fixed navbar -->
-            {% block content %}{% endblock %}
+            <!-- Mobile Menu Button (Placeholder) -->
+            <div class="md:hidden">
+                <button class="text-gray-900 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
+    </nav>
 
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/hui_embroidery.js' %}"></script>
+    <div class="pt-20"> <!-- Spacer for fixed navbar -->
+        {% block content %}{% endblock %}
+    </div>
 
-        {% block extra_js %}
-        {# Override this in templates to add extra javascript #}
-        {% endblock %}
-    </body>
+    <!-- Global Footer -->
+    <footer class="bg-ink text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+                <!-- 1. Brand -->
+                <div class="space-y-4">
+                    <h2 class="text-2xl font-serif text-white tracking-widest uppercase">
+                        {% trans "Hui Embroidery" %}
+                    </h2>
+                    <p class="text-gray-400 font-sans text-sm tracking-wide">
+                        {% trans "Inheriting Tradition, Stitching Time." %}
+                    </p>
+                </div>
+
+                <!-- 2. Quick Links -->
+                <div class="md:mx-auto">
+                    <h3 class="text-gold font-serif uppercase tracking-widest text-sm mb-6">
+                        {% trans "Explore" %}
+                    </h3>
+                    <ul class="space-y-3 text-sm font-sans tracking-wide text-gray-400">
+                        <li><a href="/" class="hover:text-white transition-colors">{% trans "Home" %}</a></li>
+                        <li><a href="/about-master-hui/" class="hover:text-white transition-colors">{% trans "About"
+                                %}</a></li>
+                        <li><a href="/portfolio/" class="hover:text-white transition-colors">{% trans "Portfolio" %}</a>
+                        </li>
+                        <li><a href="/contact-us/" class="hover:text-white transition-colors">{% trans "Contact" %}</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 3. Contact -->
+                <div>
+                    <h3 class="text-gold font-serif uppercase tracking-widest text-sm mb-6">
+                        {% trans "Contact" %}
+                    </h3>
+                    <div class="text-gray-400 font-sans text-sm leading-loose tracking-wide">
+                        <p>123 Embroidery Lane, Suzhou, China</p>
+                        <p>info@huiembroidery.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright Bar -->
+            <div
+                class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between text-xs text-gray-500 tracking-widest uppercase font-sans">
+                <p>&copy; {% now "Y" %} {% trans "Hui Embroidery Studio. All Rights Reserved." %}</p>
+                <p>ICP備xxxxxxx號</p>
+            </div>
+        </div>
+    </footer>
+
+    {# Global javascript #}
+    <script type="text/javascript" src="{% static 'js/hui_embroidery.js' %}"></script>
+
+    {% block extra_js %}
+    {# Override this in templates to add extra javascript #}
+    {% endblock %}
+</body>
+
 </html>

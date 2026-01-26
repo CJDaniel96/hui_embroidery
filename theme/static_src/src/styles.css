@@ -2,12 +2,9 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* Custom Typography */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500&family=Noto+Serif+SC:wght@200;300;400;500&display=swap');
-
 @layer base {
     body {
-        @apply font-sans antialiased text-gray-800 bg-white;
+        @apply font-sans antialiased text-ink bg-paper leading-loose;
     }
     h1, h2, h3, h4, h5, h6 {
         @apply font-serif;
