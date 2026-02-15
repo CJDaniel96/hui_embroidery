@@ -15,7 +15,7 @@ ENV PYTHONUNBUFFERED=1 \
     PORT=8000
 
 # Install system packages required by Wagtail and Django.
-RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
+RUN apt-get update --allow-insecure-repositories && apt-get install --yes --quiet --no-install-recommends --allow-unauthenticated \
     build-essential \
     libpq-dev \
     libmariadb-dev \
@@ -24,6 +24,7 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
     libwebp-dev \
     nodejs \
     npm \
+    gettext \
     && rm -rf /var/lib/apt/lists/*
 
 # Install the application server.
@@ -49,6 +50,9 @@ USER wagtail
 
 # Collect static files.
 RUN python manage.py collectstatic --noinput --clear
+
+# Compile translation messages.
+RUN python manage.py compilemessages
 
 # Runtime command that executes when "docker run" is called, it does the
 # following:

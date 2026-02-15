@@ -163,3 +163,39 @@ msgstr "作品集"
 #: hui_embroidery/templates/base.html:56
 msgid "Contact"
 msgstr "聯絡我們"
+
+#: home/templates/home/home_page.html:62
+msgid "No works available yet."
+msgstr "尚無作品"
+
+#: home/templates/home/home_page.html:69
+msgid "View All Works"
+msgstr "查看全部作品"
+
+#: home/templates/home/home_page.html:111
+msgid "Read Full Biography"
+msgstr "閱讀完整傳記"
+
+#: home/templates/home/home_page.html:124
+msgid "Get in Touch"
+msgstr "保持聯繫"
+
+#: home/templates/home/home_page.html:133
+msgid "Contact Us"
+msgstr "聯繫我們"
+
+#: home/templates/home/home_page.html:16
+msgid "HUI EMBROIDERY"
+msgstr "輝刺繡"
+
+#: home/templates/home/home_page.html:22
+msgid "Xiang Embroidery"
+msgstr "湘繡"
+
+#: home/templates/home/home_page.html:97
+msgid "Studio Image"
+msgstr "工作室圖片"
+
+#: home/templates/home/home_page.html:94
+msgid "Studio"
+msgstr "工作室"
