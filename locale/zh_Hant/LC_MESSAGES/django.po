@@ -199,3 +199,19 @@ msgstr "工作室圖片"
 #: home/templates/home/home_page.html:94
 msgid "Studio"
 msgstr "工作室"
+
+#: hui_embroidery/templates/base.html:136
+msgid "123 Embroidery Lane, Suzhou, China"
+msgstr "中國蘇州刺繡街123號"
+
+#: hui_embroidery/templates/base.html:137
+msgid "info@huiembroidery.com"
+msgstr "info@huiembroidery.com"
+
+#: hui_embroidery/templates/base.html:146
+msgid "ICP備xxxxxxx號"
+msgstr "ICP備xxxxxxx號"
+
+#: hui_embroidery/templates/base.html:53
+msgid "Hui Embroidery"
+msgstr "輝刺繡"

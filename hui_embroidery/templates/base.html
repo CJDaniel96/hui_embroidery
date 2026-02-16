@@ -50,7 +50,7 @@
             <!-- Logo -->
             <a href="/"
                 class="text-2xl font-serif tracking-widest text-gray-900 uppercase hover:opacity-70 transition-opacity">
-                Hui Embroidery
+                {% trans "Hui Embroidery" %}
             </a>
 
             <!-- Desktop Menu -->
@@ -118,8 +118,7 @@
                     </h3>
                     <ul class="space-y-3 text-sm font-sans tracking-wide text-gray-400">
                         <li><a href="/" class="hover:text-white transition-colors">{% trans "Home" %}</a></li>
-                        <li><a href="/about-master-hui/" class="hover:text-white transition-colors">{% trans "About"
-                                %}</a></li>
+                        <li><a href="/about-master-hui/" class="hover:text-white transition-colors">{% trans "About" %}</a></li>
                         <li><a href="/portfolio/" class="hover:text-white transition-colors">{% trans "Portfolio" %}</a>
                         </li>
                         <li><a href="/contact-us/" class="hover:text-white transition-colors">{% trans "Contact" %}</a>
@@ -133,8 +132,8 @@
                         {% trans "Contact" %}
                     </h3>
                     <div class="text-gray-400 font-sans text-sm leading-loose tracking-wide">
-                        <p>123 Embroidery Lane, Suzhou, China</p>
-                        <p>info@huiembroidery.com</p>
+                        <p>{% trans "123 Embroidery Lane, Suzhou, China" %}</p>
+                        <p>{% trans "info@huiembroidery.com" %}</p>
                     </div>
                 </div>
             </div>
@@ -143,7 +142,7 @@
             <div
                 class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between text-xs text-gray-500 tracking-widest uppercase font-sans">
                 <p>&copy; {% now "Y" %} {% trans "Hui Embroidery Studio. All Rights Reserved." %}</p>
-                <p>ICP備xxxxxxx號</p>
+                <p>{% trans "ICP備xxxxxxx號" %}</p>
             </div>
         </div>
     </footer>
